@@ -1,0 +1,26 @@
+.card {
+    width: 18rem;
+    padding: 10x;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    color: black;
+    word-wrap: break-word;
+}
+
+.card-body {
+    /* height: 7rem; */
+    word-wrap: break-word;
+}
+
+.btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.headertab {
+    margin-bottom: 1px;
+}
+
+.Topic {
+    margin-bottom: 8px;
+}
