@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-class TaskForm extends Component {
-    
+class EditTask extends Component {
 
     handleFormSubmit=(event,requestType)=>{
-        // event.preventDefault();
-       
+        event.preventDefault();
+        const _ID=this.props.match.params.ID;
+        console.log(_ID)
         const description=event.target.elements.description.value;
         let completed=event.target.elements.completed.value;
         
@@ -16,22 +15,24 @@ class TaskForm extends Component {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
-        switch(requestType){
-            case 'post':
-                axios.post('http://localhost:8080/tasks/',{
-                    description,
-                    completed
-                },
-                config)
-                break;
-            case 'patch':
 
-                return console.log("PUT",description)
-        }
+        axios.patch(`http://localhost:8080/tasks/${_ID}`,{
+            description,
+            completed
+        },
+        config).then((res)=>{
+            this.props.history.push('/');
+            this.forceUpdate();
+            console.log(res.data)
+        }).catch((error)=>{
+            console.log(error);
+        })
+               
     }
 
+
     render() {
-        return (
+        return  (
         <div>
             <form onSubmit={(event)=>this.handleFormSubmit(
                 event,
@@ -53,4 +54,4 @@ class TaskForm extends Component {
     }
 }
 
-export default TaskForm;
+export default EditTask;

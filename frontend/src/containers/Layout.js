@@ -4,19 +4,29 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 class Layout extends Component {
 
+    
     constructor(props) {
         super(props);
+
         this.state={
             isAuthenticated: false
         }
+        // if(localStorage.getItem('token')){
+        //     this.setState({
+        //         isAuthenticated:true
+        //     })
+        // }
+        console.log(this.state.isAuthenticated)
     }
     
     componentDidMount(){
+        console.log(localStorage.getItem('token'))
         if(localStorage.getItem('token')){
             this.setState({
                 isAuthenticated:true
             })
         }
+        console.log(this.state.isAuthenticated)
     }
 
     clickLogout=(event)=>{
@@ -44,12 +54,17 @@ class Layout extends Component {
     }
 
     render() {
+        // if(localStorage.getItem('token')){
+        //     this.setState({
+        //         isAuthenticated:true
+        //     })
+        // }
         return (
             <div>
                <nav class="navbar bg-light fixed-top">
                 
                 
-                <a href="" className="navbar-brand">WebSiteName</a>
+                <a href="/" className="navbar-brand">WebSiteName</a>
                 {
                     this.state.isAuthenticated?
                     <ul class="navbar-nav">
@@ -78,7 +93,8 @@ class Layout extends Component {
                 </nav>
                 <div class='mycontent'>
                 <header className="App-header">
-                    {this.props.children}
+                   {this.props.children}
+                    
                  </header>
                 </div>
             </div>
