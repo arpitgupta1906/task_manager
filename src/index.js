@@ -2,16 +2,17 @@ const express=require('express');
 require('./db/mongoose')
 const userRouter=require('./routers/user')
 const taskRouter=require('./routers/task')
-
+const cors=require('cors')
 const app=express();
-const PORT=3000;
+const PORT=8080;
 
 
 // app.use((req,res,next)=>{
 //     res.status(503).send("Server under maintainence")
 // })
-
-
+//cors is used to allow http unsecure requests
+app.use(cors());
+app.options('*',cors());
 app.use(express.json());
 
 app.use(userRouter)

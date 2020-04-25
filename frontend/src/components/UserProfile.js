@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
 import './UserProfile.css';
+import axios from 'axios';
 class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state={
-            user:{
-                name: 'Arpit',
-                email: 'gupta.25@iitj.ac.in'
-            }
+            user:{}
         }
     }
     
+    componentDidMount(){
+        let token=localStorage.getItem('token');
+        
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        if(token){
+
+            this.setState({
+                isAuthenticated: true
+            })
+            axios.get('http://localhost:8080/users/me/',
+            config
+            ).then((res)=>{
+                this.setState({
+                    user:res.data
+                })
+                // console.log(res.data)
+            }).catch((error)=>{
+                console.log(error)
+            })
+
+        }
+    }
+
     render() {
         return (
             <div>

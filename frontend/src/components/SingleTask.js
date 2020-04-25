@@ -13,7 +13,7 @@ class SingleTask extends Component {
         return (
             <div >
                 <div class="card">
-                <div class="card-header">{task.owner}</div>
+                <div class="card-header">{task.createdAt}</div>
                 <div class="card-body">
                 <div class="Topic">
                     <h6 class="headertab">Description:</h6>
