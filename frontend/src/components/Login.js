@@ -3,18 +3,20 @@ import axios from 'axios';
 class Login extends Component {
 
     handleSubmit=(event)=>{
-        // event.preventDefault();
+        event.preventDefault();
         const password=event.target.elements.password.value;
         const email=event.target.elements.email.value;
+        // console.log(email)
 
         axios.post('http://localhost:8080/users/login/',{
             email: email,
             password: password
         }).then(res=>{
+            console.log(res.data.token)
             localStorage.setItem('token',res.data.token)
             localStorage.setItem('user',JSON.stringify(res.data.user))
             // this.props.push.histo
-            console.log(res.data.token)
+            console.log(localStorage.getItem('token'))
         })
         .catch(error=>console.error(error));
 

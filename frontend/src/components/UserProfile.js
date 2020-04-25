@@ -38,7 +38,7 @@ class UserProfile extends Component {
         return (
             <div>
                 <div class="card">
-                <img src=".fall.jpg" alt="John" className="imageclass" />
+                <img src="" alt="John" className="imageclass" />
                 <h1>{this.state.user.name}</h1>
                 <p class="title">Active Member</p>
                 <p>{this.state.user.email}</p>

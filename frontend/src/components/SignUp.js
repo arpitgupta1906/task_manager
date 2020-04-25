@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 class SignUp extends Component {
 
     constructor(props) {
@@ -21,12 +21,26 @@ class SignUp extends Component {
     }
 
     handleSubmit=(event)=>{
-        event.preventDefault();
         const password=event.target.elements.password.value;
         const password2=event.target.elements.password2.value;
+        const email=event.target.email.value;
+        const name=event.target.name.value;
+        let age=event.target.age.value;
 
-        if(this.validateForm(this.state.errors) && password===password2){
-
+        if(this.validateForm(this.state.errors) && password===password2 && password.length>6){
+            if(age.size===0)
+            age=0;
+            axios.post('http://localhost:8080/users/',{
+                email,
+                password,
+                name,
+                age
+            }).then((res)=>{
+                localStorage.setItem('token',res.data.token)
+                localStorage.setItem('user',JSON.stringify(res.data.user))
+                
+                console.log(res.data.token)
+            })
         }
         else{
             let errors=this.state.errors;

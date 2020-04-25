@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class EditProfile extends Component {
 
     constructor(props) {
         super(props);
+        const user=JSON.parse(localStorage.getItem('user'));
         this.state={
             
-                email: 'gupta.25@iitj.ac.in',
-                name: "",
+                email: user.email,
+                name: user.name,
                 password: "",
-                age: "",
+                age: user.age,
                 errors:{
                     name:"",
                     email:"",
@@ -19,14 +21,39 @@ class EditProfile extends Component {
             
         }
     }
+
+   
     
     handleSubmit=(event)=>{
         event.preventDefault();
         const password=event.target.elements.password.value;
         const password2=event.target.elements.password2.value;
+        const name=event.target.elements.name.value;
+        const age=event.target.elements.age.value;
 
-        if(this.validateForm(this.state.errors) && password===password2){
 
+        if(this.validateForm(this.state.errors) && (password===password2 || password.length===0)){
+            let data={}
+            if(password.length>0){
+                data['password']=password
+            }
+            data['age']=age
+            data['name']=name
+            
+            let token=localStorage.getItem('token');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            axios.patch('http://localhost:8080/users/update/',
+            data,
+            config
+            ).then((res)=>{
+                console.log(res.data)
+                this.forceUpdate();
+            }).catch((error)=>{
+                console.log(error)
+            })
+            console.log(data);
         }
         else{
             let errors=this.state.errors;
@@ -68,6 +95,7 @@ class EditProfile extends Component {
     }
 
     render() {
+        
         const {errors}=this.state;
         return (
             <div>
@@ -80,7 +108,7 @@ class EditProfile extends Component {
 
         <div class="form-group">
             <label for="name">Username:</label>
-            <input name='name' type="name" onChange={this.handleChange} class="form-control" placeholder="Enter Username" id="name" />
+            <input name='name' type="name" onChange={this.handleChange} defaultValue={this.state.name} class="form-control" placeholder="Enter Username" id="name" />
             {this.state.name.length>0 && <span className='error'>{errors.name}</span>}
         </div>
 
@@ -96,7 +124,7 @@ class EditProfile extends Component {
         </div>
         <div class="form-group">
             <label for="age">Age:</label>
-            <input name='age' class="form-control" onChange={this.handleChange} placeholder="Enter Age" id="age" />
+            <input name='age' defaultValue={this.state.age} class="form-control" onChange={this.handleChange} placeholder="Enter Age" id="age" />
             {errors.age>0 && <span className='error'>{errors.age}</span>}
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
