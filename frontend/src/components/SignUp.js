@@ -40,7 +40,7 @@ class SignUp extends Component {
 
 
     validateForm=(errors)=>{
-        const valid=true;
+        let valid=true;
         Object.values(errors).forEach(
             (val)=>val.length>0 && (valid=false)
         );
@@ -49,7 +49,7 @@ class SignUp extends Component {
 
     handleChange=(event)=>{
         event.preventDefault();
-        const {name,value}=event.target;
+        let {name,value}=event.target;
         let errors=this.state.errors;
 
         switch(name){

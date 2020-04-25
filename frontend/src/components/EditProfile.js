@@ -40,7 +40,7 @@ class EditProfile extends Component {
 
 
     validateForm=(errors)=>{
-        const valid=true;
+        let valid=true;
         Object.values(errors).forEach(
             (val)=>val.length>0 && (valid=false)
         );
