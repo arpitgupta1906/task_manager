@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom';
+
 class Login extends Component {
 
     handleSubmit=(event)=>{
@@ -12,11 +14,11 @@ class Login extends Component {
             email: email,
             password: password
         }).then(res=>{
-            console.log(res.data.token)
+            // console.log(res.data.token)
             localStorage.setItem('token',res.data.token)
             localStorage.setItem('user',JSON.stringify(res.data.user))
-            // this.props.push.histo
-            console.log(localStorage.getItem('token'))
+            this.props.history.push('/')
+            // console.log(localStorage.getItem('token'))
         })
         .catch(error=>console.error(error));
 
@@ -44,4 +46,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

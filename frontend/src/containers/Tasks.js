@@ -8,15 +8,7 @@ class Tasks extends Component {
     constructor(props) {
         super(props);
         this.state={
-            tasks:[{
-                owner:"Arpit",
-                description: "Hello World ",
-                completed: false
-            },{
-                owner:"Arpit",
-                description: "Hello World ",
-                completed: false
-            }],
+            tasks:[],
             isAuthenticated: false
         }
     }
@@ -46,8 +38,10 @@ class Tasks extends Component {
     }
 
     render() {
-        
-            const {tasks}=this.state
+        const {tasks}=this.state
+        // let tasklist
+        // if(this.state.isAuthenticated){
+
             console.log(tasks)
             const tasklist=tasks.map((task)=>{
               return  (
@@ -57,14 +51,25 @@ class Tasks extends Component {
                 </div>
               )
             });
-
-       
+        // }
+        //    console.log(this.state.isAuthenticated)
         return (
             <div>
+            {this.state.isAuthenticated?
+                <div>
                 {tasklist.length>0? tasklist: (<p>You don't have any tasks </p>)}
                 <br/>
 
             <TaskForm requestType="post" />
+                </div>
+
+            :
+            <p>Login Required to use services</p>
+            }
+                {/* {tasklist.length>0? tasklist: (<p>You don't have any tasks </p>)}
+                <br/>
+
+            <TaskForm requestType="post" /> */}
                 
             </div>
 

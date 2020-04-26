@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom';
+
 class SignUp extends Component {
 
     constructor(props) {
@@ -38,8 +40,8 @@ class SignUp extends Component {
             }).then((res)=>{
                 localStorage.setItem('token',res.data.token)
                 localStorage.setItem('user',JSON.stringify(res.data.user))
-                
-                console.log(res.data.token)
+                this.props.history.push('/');
+                // console.log(res.data.token)
             })
         }
         else{
@@ -121,4 +123,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
