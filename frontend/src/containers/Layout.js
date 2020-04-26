@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './Layout.css';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import axios from 'axios';
+
+
 class Layout extends Component {
 
     
@@ -102,4 +104,4 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+export default withRouter(Layout);

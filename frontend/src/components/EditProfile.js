@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom';
 
 class EditProfile extends Component {
 
@@ -48,7 +49,8 @@ class EditProfile extends Component {
             data,
             config
             ).then((res)=>{
-                console.log(res.data)
+                this.props.history.push('/')
+                // console.log(res.data)
                 this.forceUpdate();
             }).catch((error)=>{
                 console.log(error)
@@ -134,4 +136,4 @@ class EditProfile extends Component {
     }
 }
 
-export default EditProfile;
+export default withRouter(EditProfile);
